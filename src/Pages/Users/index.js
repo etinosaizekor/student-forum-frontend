@@ -5,10 +5,6 @@ const UserInfo = styled.div`
     margin: 50px;
 `
 
-const PersonalDetails = styled.div`
-    width: 20px;
-`
-
 function User(){
     return(
         <UserInfo>
@@ -21,8 +17,8 @@ function User(){
                 </tr>
                 <tr>
                     <td>
-                            <h3>Etinosa Izekor</h3>
-                            <p>European University of Lefke</p>
+                        <h3>Etinosa Izekor</h3>
+                        <p>European University of Lefke</p>
                     </td>
                     <td>10</td>
                     <td>3</td>
@@ -30,8 +26,8 @@ function User(){
                 </tr>
                 <tr>
                     <td>
-                            <h3>Etinosa Izekor</h3>
-                            <p>European University of Lefke</p>
+                        <h3>Etinosa Izekor</h3>
+                        <p>European University of Lefke</p>
                     </td>
                     <td>10</td>
                     <td>3</td>
@@ -39,8 +35,8 @@ function User(){
                 </tr>
                 <tr>
                     <td>
-                            <h3>Etinosa Izekor</h3>
-                            <p>European University of Lefke</p>
+                        <h3>Etinosa Izekor</h3>
+                        <p>European University of Lefke</p>
                     </td>
                     <td>10</td>
                     <td>3</td>
@@ -48,8 +44,8 @@ function User(){
                 </tr>
                 <tr>
                     <td>
-                            <h3>Etinosa Izekor</h3>
-                            <p>European University of Lefke</p>
+                        <h3>Etinosa Izekor</h3>
+                        <p>European University of Lefke</p>
                     </td>
                     <td>10</td>
                     <td>3</td>
@@ -57,8 +53,8 @@ function User(){
                 </tr>
                 <tr>
                     <td>
-                            <h3>Etinosa Izekor</h3>
-                            <p>European University of Lefke</p>
+                        <h3>Etinosa Izekor</h3>
+                        <p>European University of Lefke</p>
                     </td>
                     <td>10</td>
                     <td>3</td>
