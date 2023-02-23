@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 const Container = styled.div`
-    width: 15%;
+    width: 12%;
     height: 100vh;
     background-color: #f8f9fa
 `

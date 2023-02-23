@@ -8,11 +8,18 @@ a{
   font-size: large;
 }
 
-
 .navbar-items{
   margin: 5px 20px;
 }
 
 li{
   margin: 30px 15px;
+}
+
+th, td{
+  padding: 0 90px;
+}
+
+tr{
+  height: 20px;
 }

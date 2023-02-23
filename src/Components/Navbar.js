@@ -6,7 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 
 function PageNavbar() {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light" expand="lg" className='navbar-custom'>
       <Container fluid className='m-4'>
         <Navbar.Brand href="#">Student Forum</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
