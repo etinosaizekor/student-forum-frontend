@@ -10,9 +10,10 @@ function Sidebar(){
     return(
         <Container>
             <ul className="navbar-items">
-                <li><a href="#">User</a></li>
+                <li><a href="/user">User</a></li>
                 <li><a href="#">Groups</a></li>
-                <li><a href="#">Posts</a></li>
+                <li><a href="/posts">Posts</a></li>
+                <li><a href="/newPost">Create Post</a></li>
             </ul>
         </Container>
     )

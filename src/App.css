@@ -23,3 +23,7 @@ th, td{
 tr{
   height: 20px;
 }
+
+form{
+  display: block;
+}

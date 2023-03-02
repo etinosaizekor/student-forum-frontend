@@ -5,7 +5,8 @@ import Sidebar from './Components/Sidebar';
 import { Routes, Route} from 'react-router'
 
 import User from './Pages/Users';
-import Post from './Pages/Posts';
+import Post from './Pages/Posts/PostPreview';
+import NewPost from './Pages/Posts/NewPost';
 
 function App() {
   return (
@@ -14,8 +15,9 @@ function App() {
       <Container>
         <Sidebar/>
         <Routes>
-          <Route path = '/' element = {<User/>}/>
-          <Route path = '/post' element = {<Post/>}/>
+          <Route path = '/user' element = {<User/>}/>
+          <Route path = '/posts' element = {<Post/>}/>
+          <Route path='/newPost' element = {<NewPost/>}/>
         </Routes>
       </Container>
     </>
