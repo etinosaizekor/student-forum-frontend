@@ -1,62 +1,71 @@
 import styled from "styled-components";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment } from '@fortawesome/free-solid-svg-icons';
+import {VscComment} from "react-icons/vsc";
 
-const PostContainer = styled.a`
-    display: flex;
-    gap: 10px;
-    width: 80vw;
-    padding: 40px;
-    margin: 30px;
-    align-items: flex-start;
-    height: 250px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.09), 0 -4px 8px rgba(0, 0, 0, 0.05);;
-    border-radius: 5px;
-    transition: 0.3s;
-    cursor: pointer;
+import Container from '../../Components/Container';
+import Profile from "../../Components/Profile";
 
-    &:hover{
-        box-shadow: 0 10px 20px rgba(0,0,0,0.09), 0 -10px 20px rgba(0, 0, 0, 0.05);
-        text-decoration: none;
-        color: inherit;
-    }
+const PostContainer = styled(Container)`
+    width: 50vw;
+    max-height: 400px;
+    height: auto;
+    margin: 30px 70px;
 `
+
 const Comment = styled.div`
     display: flex;
     gap: 10px;
-    justify-content: center;
-    align-items: center;
-    white-space: nowrap;
-    padding-top:45px;
+    white-space: nowrap;`
+
+const Divider = styled.div`
+    width: 100%;
+    height: 1px;
+    background-color: lightgray;
+    margin: 30px 0;
 `
 
-const UserDetails = styled.div`
-    p{
-        margin: 0;
-        color: #808080;
-        font-size: 0.9rem;
-    }
-    padding-top: 10px;
+const PostDetails = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+`
+
+const User = styled.div`
+    display: flex;
+    gap: 10px;
+`
+const PostTime = styled.p`
+    color: darkgray;
 `
 
 function Post() {
     return ( 
         <PostContainer>
+            
             <div>
-                <h2>Post title</h2>
+                <h3>What is the molecular fomula for Glucose</h3>
                 <p>
                     Post Content highlight.
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
                 </p>
-                <UserDetails>
-                    <p>Etinosa Izekor</p>
-                    <p>European University of Lefke</p>
-                </UserDetails>
+                <Divider/>
+                <PostDetails>
+                    <User>
+                        <Profile
+                            src={require('../../assets/prof.jpg')}
+                        />
+                        <p>Posted by <a>James Slevester</a></p>
+                    </User>
+                    <PostTime>5h ago</PostTime>
+                    <Comment>
+                        <VscComment
+                        style={{alignSelf: 'stretch', paddingTop: '5px'}}
+                        />
+                        <p>2 comments</p>
+                    </Comment>
+                </PostDetails>
             </div>
-            <Comment>
-                <FontAwesomeIcon icon={faComment} />
-                <p style={{paddingTop: "10px"}}>2 comments</p>
-            </Comment>
+            
+            {/*  */}
         </PostContainer>
      );
 }

@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
     width: 12%;
@@ -10,10 +11,10 @@ function Sidebar(){
     return(
         <Container>
             <ul className="navbar-items">
-                <li><a href="/user">User</a></li>
-                <li><a href="#">Groups</a></li>
-                <li><a href="/posts">Posts</a></li>
-                <li><a href="/newPost">Create Post</a></li>
+                <li><Link to="/user">User</Link></li>
+                <li><Link to="#">Groups</Link></li>
+                <li><Link to="/posts">Posts</Link></li>
+                <li><Link to="/newPost">Create Post</Link></li>
             </ul>
         </Container>
     )
