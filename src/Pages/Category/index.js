@@ -1,35 +1,23 @@
-import styled from 'styled-components';
-import Container from '../../Components/Container'
-
-const CategoryContainer = styled(Container)`
-    height: 150px;
-    width: 80vw;
-    justify-content: space-between;
-`
-const Overview   = styled.div`
-
-`   
+import CategoryData from '../../Data/CategoryData';
+import CategoryRow from './CategoryRow';
 
 function Category() {
-    return ( 
-        <CategoryContainer>
-            <div>
-                <h2>Category name</h2>
-                <p>This group is for the sharing of knowledge in regards to everything chemistry</p>
-            </div>
-                <Overview>
-                    <p>Post</p>
-                    <h2>126</h2>
-                </Overview>   
-                <Overview>
-                    <p>User</p>
-                    <p>100+</p>
-                </Overview>
-                <Overview>
-                    This is the last post entered and it is just an example
-                </Overview>            
-        </CategoryContainer>
-     );
+    return(
+        <div>
+        {CategoryData.map((data, index) => {
+            return(
+                    <CategoryRow
+                    categoryName = {data.category_name}
+                    desc = {data.desc}
+                    numberOfPosts = {data.number_of_post}
+                    numberOfUsers = {data.number_of_users}
+                    lastPost = {data.last_post}
+                    iconUrl = {data.icon_url}
+                    />
+            )
+        })}
+        </div>
+    )
 }
 
 export default Category;

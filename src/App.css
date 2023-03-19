@@ -17,6 +17,10 @@ ul{
   list-style-type: none;
 }
 
+table{
+  width: 60%;
+}
+
 th, td{
   padding: 5px 50px;
 }

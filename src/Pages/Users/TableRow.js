@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import ProfileIcon from "../../Components/Profile"
 
+
 const H3 = styled.h3`
     margin-bottom: 0;
     font-size: large;
