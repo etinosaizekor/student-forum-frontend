@@ -1,15 +1,14 @@
 import styled from 'styled-components';
 import Container from '../../Components/Container'
-import Post from '../Posts/PostPreview';
 
 const CategoryContainer = styled(Container)`
-    height: 200px;
+    height: 150px;
     width: 80vw;
     justify-content: space-between;
 `
 const Overview   = styled.div`
 
-`
+`   
 
 function Category() {
     return ( 

@@ -33,16 +33,16 @@ const User = styled.div`
     display: flex;
     gap: 10px;
 `
-const PostTime = styled.p`
-    color: darkgray;
+
+const H3 = styled.h3`
+    font-size: 1.5rem;
 `
 
 function Post() {
     return ( 
         <PostContainer>
-            
             <div>
-                <h3>What is the molecular fomula for Glucose</h3>
+                <H3>What is the molecular fomula for Glucose</H3>
                 <p>
                     Post Content highlight.
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
@@ -55,7 +55,7 @@ function Post() {
                         />
                         <p>Posted by <a>James Slevester</a></p>
                     </User>
-                    <PostTime>5h ago</PostTime>
+                    <p className="color-gray">5h ago</p>
                     <Comment>
                         <VscComment
                         style={{alignSelf: 'stretch', paddingTop: '5px'}}
@@ -64,8 +64,6 @@ function Post() {
                     </Comment>
                 </PostDetails>
             </div>
-            
-            {/*  */}
         </PostContainer>
      );
 }

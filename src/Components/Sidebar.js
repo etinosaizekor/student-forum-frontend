@@ -1,8 +1,9 @@
 import styled from "styled-components"
-import { Link } from "react-router-dom";
+import SidebarItems from "./SidebarItems";
+import {SidebarData} from "../Data/SidebarData";
 
 const Container = styled.div`
-    width: 12%;
+    width: 14%;
     height: 100vh;
     background-color: #f8f9fa;
 `
@@ -11,10 +12,16 @@ function Sidebar(){
     return(
         <Container>
             <ul className="navbar-items">
-                <li><Link to="/user">User</Link></li>
-                <li><Link to="#">Groups</Link></li>
-                <li><Link to="/posts">Posts</Link></li>
-                <li><Link to="/newPost">Create Post</Link></li>
+                {SidebarData.map((data, index) =>{
+                    return(
+                        <SidebarItems
+                            key={index}
+                            linkText={data.linkText}
+                            path = {data.path}
+                            icon = {data.icon}
+                        />
+                    )
+                })}
             </ul>
         </Container>
     )
