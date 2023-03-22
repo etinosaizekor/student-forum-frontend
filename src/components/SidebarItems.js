@@ -1,11 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-// const Li = styled.div`
-//     display: flex;
-//     gap:
-// `
-
 const Li = styled.li`
     display: flex;
     align-items: center;

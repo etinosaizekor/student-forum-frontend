@@ -3,17 +3,23 @@ import { SvgIcon } from '@mui/material';
 
 import QuestionAnswerRoundedIcon from '@mui/icons-material/QuestionAnswerRounded';
 import ListAltRoundedIcon from '@mui/icons-material/ListAltRounded';
-import GroupsRoundedIcon from '@mui/icons-material/GroupsRounded';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
+import HomeIcon from '@mui/icons-material/Home';
+
 const ColoredIcon = styled(SvgIcon)`
-  color: gray;
+  color: #6c757d;
 `;
 
 export const SidebarData = [
     {
-        'linkText': 'Questions',
-        'path': "/posts",
+        'linkText': 'Home',
+        'path': "/home",
+        'icon': <ColoredIcon><HomeIcon/></ColoredIcon>
+    },
+    {
+        'linkText': 'My questions',
+        'path': "/questions",
         'icon': <ColoredIcon><QuestionAnswerRoundedIcon/></ColoredIcon>
     },
     {
@@ -23,17 +29,12 @@ export const SidebarData = [
 
     },
     {
-        'linkText': 'Groups',
-        'path': "#",
-        'icon': <ColoredIcon><GroupsRoundedIcon/></ColoredIcon>
-    },
-    {
         'linkText': 'Users',
         'path': "/user",
         'icon': <ColoredIcon><PersonRoundedIcon/></ColoredIcon>
     },
     {
-        'linkText': 'Create Post',
+        'linkText': 'Ask Question',
         'path': "/newPost",
         'icon': <ColoredIcon><AddRoundedIcon/></ColoredIcon>
     }

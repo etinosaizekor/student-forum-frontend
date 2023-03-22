@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import ProfileIcon from "../../Components/Profile"
+import ProfileIcon from "../../components/Profile"
 
 
 const H3 = styled.h3`
@@ -42,20 +42,22 @@ const ProfileDetails = styled.td`
 function TableRow({name, university, latestPost, numberOfPosts, numberOfGroups, imageUrl}){
 
     return(
-        <tr>
-            <ProfileDetails>
-                <ProfileIcon 
-                    src={imageUrl}
-                />
-                <div>
-                    <H3>{name}</H3>
-                    <P className="color-gray">{university}</P>
-                </div>
-            </ProfileDetails>
-            <td><h6>{numberOfPosts}</h6></td>
-            <td><h6>{numberOfGroups}</h6></td>
-            <td><LatestPost>{latestPost}</LatestPost></td>
-        </tr>
+        <tbody>
+            <tr>
+                <ProfileDetails>
+                    <ProfileIcon 
+                        src={imageUrl}
+                    />
+                    <div>
+                        <H3>{name}</H3>
+                        <P className="color-gray">{university}</P>
+                    </div>
+                </ProfileDetails>
+                <td><h6>{numberOfPosts}</h6></td>
+                <td><h6>{numberOfGroups}</h6></td>
+                <td><LatestPost>{latestPost}</LatestPost></td>
+            </tr>
+        </tbody>
     )
 }
 

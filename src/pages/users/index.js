@@ -1,22 +1,24 @@
 import styled from "styled-components";
-import userData from '../../Data/UserData'
+import userData from '../../data/userData'
 import TableRow from "./TableRow";
 
 const UserInfo = styled.div`
     display: flex;
-    margin: 50px;
+    /* margin: 40px; */
 `
 
 function User(){
     return(
         <UserInfo>
             <table>
-                <tr>
-                    <th>Personal details</th>
-                    <th>Posts</th>
-                     <th>Groups</th>
-                    <th>Latest post</th>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>Personal details</th>
+                        <th>Posts</th>
+                        <th>Groups</th>
+                        <th>Latest post</th>
+                    </tr>
+                </thead>
                 {userData.map((user, index) =>{
                     return (
                         <TableRow 

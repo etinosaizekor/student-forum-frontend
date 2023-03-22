@@ -1,27 +1,39 @@
 import './App.css';
-import Navbar from './Components/Navbar'
-import Sidebar from './Components/Sidebar';
+import styled from 'styled-components';
+import Navbar from './components/Navbar'
+import Sidebar from './components/Sidebar';
 import { Routes, Route} from 'react-router'
 
+import User from './pages/users';
+import Post from './pages/posts/PostPreview';
+import NewPost from './pages/posts/NewPost';
+import Category from './pages/category';
+import Login from './pages/login';
 
-import User from './Pages/Users';
-import Post from './Pages/Posts/PostPreview';
-import NewPost from './Pages/Posts/NewPost';
-import Category from './Pages/Category';
+const Wrapper = styled.div`
+  margin: 150px 310px 10px;
+`
+const Body = styled.div`
+  display: flex;
+`
 
 function App() {
   return (
     <>
       <Navbar/> 
-      <div style={{display: "flex"}}>
+      <Body>
         <Sidebar/>
-        <Routes>
-          <Route path = '/user' element = {<User/>}/>
-          <Route path = '/posts' element = {<Post/>}/>
-          <Route path='/newPost' element = {<NewPost/>}/>
-          <Route path='/categories' element = {<Category/>}/>
-        </Routes>
-      </div >
+        <Wrapper>
+            <Routes>
+            <Route path = '/login' element = {<Login/>}/>
+              <Route path = '/user' element = {<User/>}/>
+              <Route path = '/questions' element = {<Post/>}/>
+              <Route path='/newPost' element = {<NewPost/>}/>
+              <Route path='/categories' element = {<Category/>}/>
+            </Routes>
+
+        </Wrapper>
+      </Body >
     </>
   );
 }

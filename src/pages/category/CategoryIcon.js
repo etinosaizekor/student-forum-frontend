@@ -2,7 +2,7 @@
 import styled from "styled-components";
 
 const Icon = styled.div`
-    width: 120px;
+    width: 130px;
     height: 90%;
     border-radius: 10%;
     overflow: hidden;

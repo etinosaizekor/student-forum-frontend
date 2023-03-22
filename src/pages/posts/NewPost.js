@@ -51,7 +51,8 @@ function NewPost() {
       onChange={handleChange}
       />
       <BodyArea 
-        type="text" 
+        type="te
+        xt" 
         name="content"
         value={formData.content}  
         onChange={handleChange}
