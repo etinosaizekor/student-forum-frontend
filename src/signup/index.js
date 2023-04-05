@@ -1,7 +1,9 @@
+import axios from 'axios';
 import styled from 'styled-components';
 import Button from 'react-bootstrap/Button';
 import Container from '../components/Container';
 import Form from 'react-bootstrap/Form';
+
 
 const RegistrationContainer = styled(Container)`
   width: 50vw;
@@ -38,41 +40,68 @@ const FormLabel = styled(Form.Label)`
   margin-bottom: 0;
 `;
 
+const handleSubmit = async (event) => {
+  event.preventDefault(); 
+
+  const formData = new FormData(event.target);
+  const firstName = formData.get('firstName');
+  console.log(firstName);
+  const lastName = formData.get('lastName');
+  const email = formData.get('email');
+  const school = formData.get('school');
+  const password = formData.get('password');
+
+  try {
+    console.log(firstName)
+
+    const response = await axios.post('http://localhost:5000/users', {
+      firstName,
+      lastName,
+      email,
+      school,
+      password,
+    });
+
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 function Registration() {
   return (
     <RegistrationContainer>
       <h3>Register</h3>
-      <Form style={{ width: "100%" }}>
+      <Form onSubmit={handleSubmit} style={{ width: "100%" }}>
         <FormRow>
           <FormColumn>
             <FormLabel>First name</FormLabel>
-            <Form.Control type="text" placeholder="Enter first name" />
+            <Form.Control type="text" placeholder="Enter first name" name="firstName"/>
           </FormColumn>
           <FormColumn>
             <FormLabel>Last name</FormLabel>
-            <Form.Control type="text" placeholder="Enter last name" />
+            <Form.Control type="text" placeholder="Enter last name" name="lastName"/>
           </FormColumn>
         </FormRow>
 
         <FormRow>
           <FormColumn>
             <FormLabel>Email address</FormLabel>
-            <Form.Control type="email" placeholder="Enter email" />
+            <Form.Control type="email" placeholder="Enter email" name="email"/>
           </FormColumn>
           <FormColumn>
-            <FormLabel>University</FormLabel>
-            <Form.Control type="text" placeholder="Enter university" />
+            <FormLabel>school</FormLabel>
+            <Form.Control type="text" placeholder="Enter school" name="school"/>
           </FormColumn>
         </FormRow>
 
         <FormRow>
           <FormColumn>
             <FormLabel>Create password</FormLabel>
-            <Form.Control type="password" placeholder="Enter password" />
+            <Form.Control type="password" placeholder="Enter password" name="password"/>
           </FormColumn>
           <FormColumn>
             <FormLabel>Confirm password</FormLabel>
-            <Form.Control type="password" placeholder="Confirm password" />
+            <Form.Control type="password" placeholder="Confirm password" name="password"/>
           </FormColumn>
         </FormRow>
 
