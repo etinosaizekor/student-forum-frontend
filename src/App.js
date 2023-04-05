@@ -9,6 +9,7 @@ import Post from './pages/posts/PostPreview';
 import NewPost from './pages/posts/NewPost';
 import Category from './pages/category';
 import Login from './pages/login';
+import Registration from './signup';
 
 const Wrapper = styled.div`
   margin: 150px 310px 10px;
@@ -26,6 +27,7 @@ function App() {
         <Wrapper>
             <Routes>
             <Route path = '/login' element = {<Login/>}/>
+              <Route path='/register' element={<Registration/>}></Route>
               <Route path = '/user' element = {<User/>}/>
               <Route path = '/questions' element = {<Post/>}/>
               <Route path='/newPost' element = {<NewPost/>}/>

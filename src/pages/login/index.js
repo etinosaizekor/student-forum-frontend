@@ -7,7 +7,6 @@ const LoginFormContainer = styled(Container)`
   width:50vw;
   height: 70vh;
   align-items: center;
-  background-color: ;
   padding: 70px;
   position: absolute;
   margin: 10px 120px;

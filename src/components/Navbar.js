@@ -41,7 +41,7 @@ function PageNavbar() {
           </Form>
           <ButtonContainer>
             <Button variant="secondary" href='/login'>Login</Button>
-            <Button variant="outline-secondary">Sign up </Button>
+            <Button variant="outline-secondary" href='register'>Sign up </Button>
           </ButtonContainer>
         </Navbar.Collapse>
       </Container>
