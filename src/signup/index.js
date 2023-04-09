@@ -52,8 +52,6 @@ const handleSubmit = async (event) => {
   const password = formData.get('password');
 
   try {
-    console.log(firstName)
-
     const response = await axios.post('http://localhost:5000/users', {
       firstName,
       lastName,

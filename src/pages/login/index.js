@@ -1,7 +1,15 @@
 import styled from 'styled-components';
 import Button from 'react-bootstrap/Button';
 import Container from '../../components/Container';
-import Form from 'react-bootstrap/Form';
+import FormWrapper from 'react-bootstrap/Form';
+import { Formik, Field, ErrorMessage, Form as FormikForm } from 'formik';
+import * as Yup from 'yup';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+
+import { isLogged } from '../../actions';
+import { useSelector, useDispatch} from 'react-redux';  
 
 const LoginFormContainer = styled(Container)`
   width:50vw;
@@ -33,28 +41,70 @@ const Image = styled.img`
 `
 
 function Login() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const initialValues = {
+    email: '',
+    password: '',
+  };
+
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().email('Invalid email address').required('Required'),
+    password: Yup.string()
+      .min(6, 'Password must be at least 6 characters')
+      .required('Required'),
+  });
+
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleSubmit = (values, { setSubmitting, resetForm }) => {
+    setSubmitting(true);
+    axios.post('http://localhost:5000/users/login', values)
+      .then((response) => {
+        if(response.status === 200){
+          dispatch(isLogged());
+          navigate('/questions');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        setErrorMessage('Invalid email address or password');
+      })
+      .finally(() => {
+        setSubmitting(false);
+        // resetForm();
+      });
+  }
+
   return (
     <LoginFormContainer>
       <ImageContainer>
         <Image src={require('../../assets/study.png')} alt="" />
       </ImageContainer>
-      <Form>
-        <h3 style={{paddingBottom: "10px"}}>Login</h3>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
-        </Form.Group>
+      <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
+        {({ isSubmitting }) => (
+          <FormikForm>
+            <h3 style={{paddingBottom: "10px"}}>Login</h3>
+            <FormWrapper.Group className="mb-3" controlId="formBasicEmail">
+              <Field type="email" name="email" placeholder="Email or phone" className="form-control" />
+              <ErrorMessage name="email" component="div" className="text-danger" />
+            </FormWrapper.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        </Form.Group>
-        <Button variant="secondary" type="submit" style={{width: "100%", marginTop: "10px"}}>
-          Submit
-        </Button>
-      </Form>
+            <FormWrapper.Group className="mb-3" controlId="formBasicPassword">
+              <Field type="password" name="password" placeholder="Password" className="form-control" />
+              <ErrorMessage name="password" component="div" className="text-danger" />
+            </FormWrapper.Group>
+
+            {errorMessage && <div className="text-danger mb-3">{errorMessage}</div>}
+
+            <Button variant="secondary" type="submit" style={{width: "100%", marginTop: "10px"}} disabled={isSubmitting}>
+              {isSubmitting ? 'Logging in...' : 'Log in'}
+            </Button>
+
+          </FormikForm>
+        )}
+      </Formik>
     </LoginFormContainer>
   );
 }
