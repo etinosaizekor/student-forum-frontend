@@ -8,7 +8,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-import { isLogged } from '../../actions';
+import { loggedIn } from '../../actions';
 import { useSelector, useDispatch} from 'react-redux';  
 
 const LoginFormContainer = styled(Container)`
@@ -40,9 +40,11 @@ const Image = styled.img`
   object-fit: cover;
 `
 
+
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const fullName = useSelector(state => state.loggedIn.nameOfUser);
 
   const initialValues = {
     email: '',
@@ -63,7 +65,7 @@ function Login() {
     axios.post('http://localhost:5000/users/login', values)
       .then((response) => {
         if(response.status === 200){
-          dispatch(isLogged());
+          dispatch(loggedIn(response.data.fullName));
           navigate('/questions');
         }
       })
@@ -75,9 +77,11 @@ function Login() {
         setSubmitting(false);
         // resetForm();
       });
-  }
+    }
+    
 
   return (
+    
     <LoginFormContainer>
       <ImageContainer>
         <Image src={require('../../assets/study.png')} alt="" />
@@ -107,6 +111,8 @@ function Login() {
       </Formik>
     </LoginFormContainer>
   );
+
+  
 }
 
 export default Login;

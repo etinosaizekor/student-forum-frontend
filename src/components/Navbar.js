@@ -1,14 +1,20 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import Profile from './Profile';
+import { useDispatch, useSelector } from 'react-redux';
+import { loggedOut } from '../actions';
 
 
 const NavBar = styled(Navbar)`
   position: fixed;
   width: 100vw;
+  z-index: 10;
+
 `
 
 const ButtonContainer = styled.div`
@@ -17,7 +23,37 @@ const ButtonContainer = styled.div`
   margin-left: 50px;
 `
 
+const ProfileCard = styled.div`
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right:100px;
+  width: 300px;
+  height: 100px;
+  padding: 10px 20px 10px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  z-index: 11;
+  transition: all 0.5s ease-in-out;
+`;
+
 function PageNavbar() {
+
+  const dispatch = useDispatch();
+  const nameOfUser = useSelector(state => state.loggedIn.nameOfUser)
+  const isLoggedIn = useSelector(state => state.loggedIn.isLoggedIn)
+  const [showProfileCard, setShowProfileCard] = useState(false);
+
+  const handleProfileIconClick = () => {
+    setShowProfileCard(!showProfileCard);
+  };
+
+  const handleSignOutClick = () => {
+    dispatch(loggedOut())
+    setShowProfileCard(!showProfileCard);
+  };
+
+
   return (
     <NavBar style={{backgroundColor: "rgb(244, 245, 247)"}} expand="lg" className='navbar-custom'>
       <Container fluid className='m-4'>
@@ -30,7 +66,7 @@ function PageNavbar() {
             navbarScroll
           >
           </Nav>
-          <Form className="d-flex" style={{margin: "auto", padding: "auto"}}>
+          <Form className="d-flex" style={{marginRight: "450px", padding: "auto"}}>
             <Form.Control
               type="search"
               className="me-2"
@@ -39,12 +75,31 @@ function PageNavbar() {
             />
             <Button variant="outline-secondary">Search</Button>
           </Form>
-          <ButtonContainer>
-            <Button variant="secondary" href='/login'>Login</Button>
-            <Button variant="outline-secondary" href='register'>Sign up </Button>
-          </ButtonContainer>
+          {isLoggedIn ? ( 
+            <Profile
+              src={"https://images.unsplash.com/photo-1618835962148-cf177563c6c0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cG9ydHJhaXQlMjBmYWNlfGVufDB8fDB8fA%3D%3D&w=1000&q=80"} 
+              onClick={handleProfileIconClick}>
+            </Profile>
+          ) : (
+            <ButtonContainer>
+              <Button variant="secondary" href="/login">
+                Login
+              </Button>
+              <Button variant="outline-secondary" href="register">
+                Sign up
+              </Button>
+            </ButtonContainer>
+          )}
         </Navbar.Collapse>
       </Container>
+      {showProfileCard && ( 
+        <ProfileCard>
+          <div>
+            <strong>Name:</strong> {nameOfUser}
+          </div>
+          <Button variant="secondary" onClick={handleSignOutClick} style={{marginTop: "10px"}}>Sign Out</Button>
+        </ProfileCard>
+      )}
     </NavBar>
   );
 }
