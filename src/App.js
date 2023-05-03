@@ -10,6 +10,7 @@ import NewPost from './pages/posts/NewPost';
 import Category from './pages/category';
 import Login from './pages/login';
 import Registration from './signup';
+import Question from './pages/posts/PostView';
 import { useSelector } from 'react-redux';
 
 const Wrapper = styled.div`
@@ -35,6 +36,7 @@ function App() {
               <Route path = '/questions' element = {<Post/>}/>
               <Route path='/newPost' element = {<NewPost/>}/>
               <Route path='/categories' element = {<Category/>}/>
+              <Route path='/post' element = {<Question/>}/>
             </Routes>
 
         </Wrapper>  

@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 import Container from '../../components/Container';
 import Profile from "../../components/Profile";
+import Divider from "../../components/LineDivider";
+import UserPreview from "./UserPreview";
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 
 const PostContainer = styled(Container)`
@@ -17,22 +19,10 @@ const Comment = styled.div`
     gap: 10px;
 `
 
-const Divider = styled.div`
-    width: 100%;
-    height: 1px;
-    background-color: lightgray;
-    margin: 30px 0;
-`
-
 const PostDetails = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
-`
-
-const User = styled.div`
-    display: flex;
-    gap: 10px;
 `
 
 function Post() {
@@ -47,12 +37,12 @@ function Post() {
                     </p>
                     <Divider/>
                     <PostDetails>
-                        <User>
+                        <UserPreview>
                             <Profile
                                 src={require('../../assets/prof.jpg')}
                             />
                             <p>Posted by <a href="#">James Slevester</a></p>
-                        </User>
+                        </UserPreview>
                         <p className="color-gray">5h ago</p>
                         <Comment>
                             <ChatBubbleOutlineIcon/>
