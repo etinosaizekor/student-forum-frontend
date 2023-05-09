@@ -1,19 +1,25 @@
 import UserPreview from "./UserPreview";
 import Profile from "../../components/Profile";
 import styled from "styled-components";
-import { useState } from "react";
 import ReplyIcon from '@mui/icons-material/Reply';
-import Button from 'react-bootstrap/Button';
 import CommentDialog from "./CommentTextbox";
+import axios from "axios";
 
 const CommentContent = styled.div`
     margin-left: 65px;
     margin-bottom: 30px;
 `
 
-
-
 function Comment() {
+
+    const handleSubmit = (reply) => {
+        axios({
+            method: 'post',
+            url: 'http://localhost:5000/reply/new',
+            data: reply
+          })
+        };
+
     return ( 
         <>
             <UserPreview>
@@ -25,6 +31,7 @@ function Comment() {
                 <CommentDialog
                     Icon={ReplyIcon}
                     commentText="Reply"
+                    handleSubmit={handleSubmit}
                 />
             </CommentContent>   
         </>

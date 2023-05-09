@@ -2,8 +2,8 @@ import styled from "styled-components";
 import Container from "../../components/Container";
 import Divider from "../../components/LineDivider";
 import Comment from "./Comment";
-import Button from "react-bootstrap/esm/Button";
 import CommentDialog from "./CommentTextbox";
+import axios from "axios";
 
 const PostViewContainer = styled(Container)`
     padding: 50px;
@@ -13,10 +13,18 @@ const PostViewContainer = styled(Container)`
     &:hover{
         box-shadow: 0 4px 8px rgba(0,0,0,0.09);
     }
-
 `
 
 function Question() {
+
+    const handleSubmit = (comment) => {
+        axios({
+            method: 'post',
+            url: 'http://localhost:5000/comments/new',
+            data: comment
+        })
+    };
+
     return (
         <PostViewContainer>
             <div>
@@ -27,6 +35,7 @@ function Question() {
                 </p>        
                 <CommentDialog
                     commentText = "Add comment"
+                    handleSubmit={handleSubmit}
                 />
                 <Divider/>
                 <Comment/>
