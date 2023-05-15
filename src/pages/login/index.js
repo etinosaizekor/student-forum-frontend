@@ -8,7 +8,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-import { loggedIn } from '../../actions';
+import { loggedIn } from '../../actions/loginAction';
 import { useSelector, useDispatch} from 'react-redux';  
 
 const LoginFormContainer = styled(Container)`
@@ -65,7 +65,7 @@ function Login() {
     axios.post('http://localhost:5000/users/login', values)
       .then((response) => {
         if(response.status === 200){
-          dispatch(loggedIn(response.data.fullName));
+          dispatch(loggedIn(response.data));
           navigate('/questions');
         }
       })

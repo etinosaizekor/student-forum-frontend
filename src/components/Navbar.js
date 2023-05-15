@@ -7,7 +7,9 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Profile from './Profile';
 import { useDispatch, useSelector } from 'react-redux';
-import { loggedOut } from '../actions';
+import { loggedOut } from '../actions/loginAction';
+import { setUserDetails } from '../actions/userDetailsAction';
+
 
 
 const NavBar = styled(Navbar)`
@@ -40,7 +42,7 @@ const ProfileCard = styled.div`
 function PageNavbar() {
 
   const dispatch = useDispatch();
-  const nameOfUser = useSelector(state => state.loggedIn.nameOfUser)
+  const nameOfUser = useSelector(state => state.userDetails.nameOfUser)
   const isLoggedIn = useSelector(state => state.loggedIn.isLoggedIn)
   const [showProfileCard, setShowProfileCard] = useState(false);
 

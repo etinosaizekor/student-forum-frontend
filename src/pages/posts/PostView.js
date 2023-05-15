@@ -19,6 +19,7 @@ const PostViewContainer = styled(Container)`
 `
 
 
+
 function Question() {
     const [comments, setComments] = useState([]);
     const [replies, setReplies] = useState([]);
@@ -28,7 +29,6 @@ function Question() {
         try {
             const response = await axios.get("http://localhost:5000/comments");
             setComments(response.data);
-            console.log("Comment triggered!");
         } catch (error) {
             console.error(error);
         }
@@ -51,8 +51,8 @@ function Question() {
 
     const handleReplyAdded = (newReply) => {
         setReplies([...replies, newReply]);
-        
-        
+
+
     };
 
     useEffect(() => {
@@ -76,23 +76,23 @@ function Question() {
                 <CommentTextArea onCommentAdded={handleCommentAdded} />
                 <Divider />
                 {comments.map((comment) => (
-                    
-    <div key={comment.commentId}>
-        <Comment key={comment.commentId} commentId={comment.commentId} commentText={comment.commentBody} onReplyAdded={handleReplyAdded} />
-        <div>
-            {replies
-                .filter((reply) => reply.commentId === comment.commentId)
-                .map((reply, index) => {
-                    if (reply.commentId === comment.commentId) {
-                        console.log(`${reply.commentId} -${index}`);
-                        return <Reply key={`${reply.commentId}-${index}`} replyText={reply.replyBody} />;
-                    } else {
-                        return null;
-                    }
-                })}
-        </div>
-    </div>
-))}
+
+                    <div key={comment.commentId}>
+                        <Comment key={comment.commentId} commentId={comment.commentId} commentText={comment.commentBody} onReplyAdded={handleReplyAdded} />
+                        <div>
+                            {replies
+                                .filter((reply) => reply.commentId === comment.commentId)
+                                .map((reply, index) => {
+                                    if (reply.commentId === comment.commentId) {
+                                        console.log(`${reply.commentId} -${index}`);
+                                        return <Reply key={`${reply.commentId}-${index}`} replyText={reply.replyBody} />;
+                                    } else {
+                                        return null;
+                                    }
+                                })}
+                        </div>
+                    </div>
+                ))}
 
             </div>
         </PostViewContainer>
