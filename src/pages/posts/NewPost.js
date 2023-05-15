@@ -68,7 +68,6 @@ function NewPost() {
       variant="outline-success" 
       type="submit" 
       >Post</Button>
-
     </Form>
   );
 }

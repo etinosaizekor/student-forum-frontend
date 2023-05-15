@@ -9,6 +9,7 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 const PostContainer = styled(Container)`
     width: 50vw;
     max-height: 400px;
+    
     height: 500px;
     padding: 50px;
     position: relative;
