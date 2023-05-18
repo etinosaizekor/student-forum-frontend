@@ -5,12 +5,12 @@ import Sidebar from './components/Sidebar';
 import { Routes, Route} from 'react-router'
 
 import User from './pages/users';
-import Post from './pages/posts/PostPreview';
+import UserQuestions from './pages/posts/PostPreview';
 import NewPost from './pages/posts/NewPost';
 import Category from './pages/category';
 import Login from './pages/login';
 import Registration from './signup';
-import Question from './pages/posts/PostView';
+import PostView from './pages/posts/PostView';
 import { useSelector } from 'react-redux';
 
 const Wrapper = styled.div`
@@ -22,7 +22,7 @@ const Body = styled.div`
 
 function App() {
   const isLoggedIn = useSelector(state => state.loggedIn)
-  
+
   return (
     <>
       <Navbar/> 
@@ -33,12 +33,11 @@ function App() {
             <Route path = '/login' element = {<Login/>}/>
               <Route path='/register' element={<Registration/>}></Route>
               <Route path = '/user' element = {<User/>}/>
-              <Route path = '/questions' element = {<Post/>}/>
+              <Route path = '/questions' element = {<UserQuestions/>}/>
               <Route path='/newPost' element = {<NewPost/>}/>
               <Route path='/categories' element = {<Category/>}/>
-              <Route path='/post' element = {<Question/>}/>
+              <Route path='/question/:id' element = {<PostView/>}/>
             </Routes>
-
         </Wrapper>  
       </Body >
     </>

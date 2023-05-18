@@ -43,6 +43,7 @@ function TextArea({Icon, label, name, onSubmit}) {
 
   const onSubmitClick = () => {
     onSubmit(value);
+    setValue("")
     setShowTextArea(false);
   }
 

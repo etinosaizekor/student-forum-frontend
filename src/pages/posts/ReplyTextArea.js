@@ -1,16 +1,12 @@
 import TextArea  from "./TextAreaField"
-import axios from "axios"
+import api from "../../utils/api"
 
 function ReplyTextArea({id, onReplyAdded}) {
 
     const handleSubmit = async(value) => {
         const data = { replyBody: value, commentId: id, userId: "123"}
       try{
-        const response = axios({
-          method: 'post',
-          url: 'http://localhost:5000/replies/new',
-          data: data
-        })
+        api.post('/replies/new', data)
         onReplyAdded(data)
       } catch(err){
         console.log(err);

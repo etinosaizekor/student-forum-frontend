@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Button from 'react-bootstrap/Button';
 import { useState } from "react";
-import axios from 'axios'
+import api from "../../utils/api";
 
 
 const TextArea = styled.textarea`
@@ -29,11 +29,7 @@ function NewPost() {
   const handleSubmit = async(event) => {
     event.preventDefault();
 
-    axios({
-      method: 'post',
-      url: 'http://localhost:5000/posts/new',
-      data: formData
-    })
+    api.post('/post/new', formData);
   };
 
   const handleChange = (event) => {
