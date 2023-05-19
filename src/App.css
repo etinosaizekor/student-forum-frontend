@@ -43,7 +43,9 @@ h4{
   color: rgb(147, 144, 144);
 }
 
-.question a{
+.link,
+.link:hover,
+.link:focus {
   text-decoration: none;
   outline: none;
   color: inherit;

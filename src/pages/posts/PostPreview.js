@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserQuestions } from '../../actions/userQuestionAction';
 import Container from '../../components/Container';
 import Profile from "../../components/Profile";
 import Divider from "../../components/LineDivider";
@@ -31,19 +29,12 @@ const PostDetails = styled.div`
 
 
 
-function Post() {
-    const dispatch = useDispatch();
-    const { questions, loading, error } = useSelector((state) => state.userQuestions);
-    const userId = useSelector((state) => state.userDetails.userId);
-
-    useEffect(() => {
-        dispatch(fetchUserQuestions('123'));
-    }, [dispatch]);
+function Post({ questions }) {
 
     return (
-        <div className="question">
+        <div>
             {questions.map(({ questionTitle, questionBody, questionId }) => (
-                <Link key={questionId} to={`/question/${questionId}`}>
+                <Link key={questionId} to={`/question/${questionId}`} className='link'>
                     <PostContainer>
                         <div>
                             <h4>{questionTitle}</h4>

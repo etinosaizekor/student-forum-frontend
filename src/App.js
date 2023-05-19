@@ -5,7 +5,7 @@ import Sidebar from './components/Sidebar';
 import { Routes, Route} from 'react-router'
 
 import User from './pages/users';
-import UserQuestions from './pages/posts/PostPreview';
+import UserQuestions from './pages/posts/UserPostPreview';
 import NewPost from './pages/posts/NewPost';
 import Category from './pages/category';
 import Login from './pages/login';
@@ -37,6 +37,7 @@ function App() {
               <Route path='/newPost' element = {<NewPost/>}/>
               <Route path='/categories' element = {<Category/>}/>
               <Route path='/question/:id' element = {<PostView/>}/>
+              <Route path='/category/:posts' element = {<PostView/>}/>
             </Routes>
         </Wrapper>  
       </Body >
