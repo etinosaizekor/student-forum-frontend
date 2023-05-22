@@ -9,7 +9,7 @@ const categoryData = [
       },
       {
         category_name: "Mechanics",
-        desc: "The branch of physics concerned with the behavior of physical bodies when subjected to forces or displacements.",
+        desc: "The branch of physics   with the behavior of physical bodies when subjected to forces or displacements.",
         number_of_post: 25,
         number_of_users: 30,
         last_post: "How to calculate the trajectory of a projectile?",
@@ -81,30 +81,3 @@ const categoryData = [
 ]
 
 export default categoryData
-
-// return ( 
-//     <CategoryContainer>
-//         <div>
-//             <h2>Category name</h2>
-//             <p>This group is for the sharing of knowledge in regards to everything chemistry</p>
-//         </div>
-//         {CategoryData.map((data, index) => {
-//             return (
-//                 <Overview
-                    
-//                 />
-//             )
-//         }) }
-//             <Overview>
-//                 <p>Post</p>
-//                 <h2>126</h2>
-//             </Overview>   
-//             <Overview>
-//                 <p>User</p>
-//                 <p>100+</p>
-//             </Overview>
-//             <Overview>
-//                 This is the last post entered and it is just an example
-//             </Overview>            
-//     </CategoryContainer>
-//  );

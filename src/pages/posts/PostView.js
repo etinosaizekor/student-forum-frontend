@@ -85,7 +85,7 @@ function Question() {
                                     commentId={comment.commentId}
                                     commentText={comment.commentBody}
                                     onReplyAdded={handleReplyAdded}
-                                />
+                                />      
                                 <div>
                                     {replies
                                         .filter((reply) => reply.commentId === comment.commentId)

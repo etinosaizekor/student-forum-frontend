@@ -1,22 +1,35 @@
-import CategoryData from '../../data/categoryData';
 import CategoryRow from './CategoryRow';
 import { Link } from 'react-router-dom';
+import api from '../../utils/api';
+import { useEffect, useState } from 'react';
 
 
 function Category() {
+
+    const [categories, setCategories] = useState([])
+
+    const fetchCategories = async() => {
+        const response = await api.get(`/categories/`); 
+        setCategories(response.data);
+    }
+
+    useEffect(() => {
+        fetchCategories();
+    }, []) 
+
     return(
         <div>
-        {CategoryData.map((data, index) => {
+        {categories.map(({categoryId, categoryName, categoryDescription, iconUrl}, index) => {
             return(
-                <Link className='link' key={index} to={`post/category/`}>
+                <Link className='link' key={index} to={`/categories/${categoryId}/questions`}>
                     <CategoryRow
                     key={index}
-                    categoryName = {data.category_name}
-                    desc = {data.desc}
-                    numberOfPosts = {data.number_of_post}
-                    numberOfUsers = {data.number_of_users}
-                    lastPost = {data.last_post}
-                    iconUrl = {data.icon_url}
+                    categoryName = {categoryName}
+                    desc = {categoryDescription}
+                    // numberOfPosts = {data.number_of_post}
+                    // numberOfUsers = {data.number_of_users}
+                    // lastPost = {data.last_post}
+                    iconUrl = {iconUrl}
                     />            
                 </Link>
             )

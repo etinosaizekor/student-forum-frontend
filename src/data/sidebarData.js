@@ -37,10 +37,5 @@ export const SidebarData = [
         'linkText': 'Ask Question',
         'path': "/newPost",
         'icon': <ColoredIcon><AddRoundedIcon/></ColoredIcon>
-    },
-    {
-        'linkText': 'Full post',
-        'path': "post",
-        'icon': <ColoredIcon><AddRoundedIcon/></ColoredIcon>
     }
 ]

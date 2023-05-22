@@ -1,9 +1,10 @@
 import './App.css';
 import styled from 'styled-components';
 import Navbar from './components/Navbar'
-import Sidebar from './components/Sidebar';
+import { useSelector } from 'react-redux';
 import { Routes, Route} from 'react-router'
 
+import Sidebar from './components/Sidebar';
 import User from './pages/users';
 import UserQuestions from './pages/posts/UserPostPreview';
 import NewPost from './pages/posts/NewPost';
@@ -11,7 +12,7 @@ import Category from './pages/category';
 import Login from './pages/login';
 import Registration from './signup';
 import PostView from './pages/posts/PostView';
-import { useSelector } from 'react-redux';
+import CategoryPostPreview from './pages/posts/CategoryPostPreview';
 
 const Wrapper = styled.div`
   margin: 150px 310px 10px;
@@ -37,7 +38,7 @@ function App() {
               <Route path='/newPost' element = {<NewPost/>}/>
               <Route path='/categories' element = {<Category/>}/>
               <Route path='/question/:id' element = {<PostView/>}/>
-              <Route path='/category/:posts' element = {<PostView/>}/>
+              <Route path='/categories/:categoryId/questions/' element = {<CategoryPostPreview/>}/>
             </Routes>
         </Wrapper>  
       </Body >
