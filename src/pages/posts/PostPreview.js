@@ -7,7 +7,10 @@ import Divider from "../../components/LineDivider";
 import UserPreview from "./UserPreview";
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import api from "../../utils/api";
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 
+dayjs.extend(relativeTime);
 
 const PostContainer = styled(Container)`
     width: 50vw;
@@ -30,11 +33,11 @@ const PostDetails = styled.div`
 
 function Post({ questions }) {
   const [userDetails, setUserDetails] = useState([]);
+  const [commentsCount, setCommentsCount] = useState({});
 
   const fetchUserDetails = async (userId) => {
     try {
       const response = await api.get(`/users/${userId}`);
-      console.log(response.data);
       const userDetailsData = response.data;
       setUserDetails((prevUserDetails) => [...prevUserDetails, userDetailsData]);
     } catch (error) {
@@ -42,28 +45,45 @@ function Post({ questions }) {
     }
   };
 
-  
+  const fetchCommentsCount = async (questionId) => {
+    try {
+      const response = await api.get(`/comments/${questionId}`);
+      const commentsData = response.data;
+      const commentsCountData = commentsData.length;
+      setCommentsCount((prevCommentsCount) => ({
+        ...prevCommentsCount,
+        [questionId]: commentsCountData,
+      }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
-      for (const { userId } of questions) {
+      for (const { userId, questionId } of questions) {
         if (userId !== null && !userDetails.find((user) => user.userId === userId)) {
           await fetchUserDetails(userId);
+        }
+
+        if (!commentsCount[questionId]) {
+          await fetchCommentsCount(questionId);
         }
       }
     };
 
     fetchData();
-  }, [questions, userDetails]);
+  }, [questions]);
 
   return (
     <div>
-      {questions.map(({ questionTitle, questionBody, questionId, userId }) => {
+      {questions.map(({ questionTitle, questionBody, questionId, userId, createdAt }) => {
         const currentUserDetails = userDetails.find((user) => user.userId === userId) || {};
-        console.log(currentUserDetails);
+        const questionCommentsCount = commentsCount[questionId] || 0;
+        const formattedTime = dayjs(createdAt).fromNow();
 
         return (
-          <Link key={questionId} to={`/question/${questionId}`} className='link'>
+          <Link key={questionId} to={`/question/${questionId}`} className="link">
             <PostContainer>
               <div>
                 <h4>{questionTitle}</h4>
@@ -71,13 +91,13 @@ function Post({ questions }) {
                 <Divider />
                 <PostDetails>
                   <UserPreview>
-                    <Profile src={require('../../assets/prof.jpg')} />
+                    <Profile src={require("../../assets/prof.jpg")} />
                     <p>{`${currentUserDetails.firstName} ${currentUserDetails.lastName}`}</p>
                   </UserPreview>
-                  <p className='color-gray'>5h ago</p>
+                  <p className="color-gray">{formattedTime}</p>
                   <Comment>
                     <ChatBubbleOutlineIcon />
-                    <p>2 comments</p>
+                    <p>{`${questionCommentsCount} comment${questionCommentsCount !== 1 ? "s" : ""}`}</p>
                   </Comment>
                 </PostDetails>
               </div>
@@ -88,6 +108,7 @@ function Post({ questions }) {
     </div>
   );
 }
+
 
 
 

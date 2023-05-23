@@ -6,7 +6,7 @@ function ReplyTextArea({id, onReplyAdded}) {
     const handleSubmit = async(value) => {
         const data = { replyBody: value, commentId: id, userId: "123"}
       try{
-        api.post('/replies/new', data)
+        await api.post('/replies/new', data)
         onReplyAdded(data)
       } catch(err){
         console.log(err);
