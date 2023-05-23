@@ -6,11 +6,9 @@ import api from '../../utils/api';
 function CategoryPostPreview() {
     const [categoryQuestions, setCategoryQuestions] = useState([])
     const {categoryId} = useParams();
-    console.log(categoryId);
 
     const fetchCategoryQuestions = async() => {
         const response = await api.get(`/questions/category/${categoryId}`);
-        console.log(response);
         setCategoryQuestions(response.data);
     }
 
