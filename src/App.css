@@ -12,6 +12,10 @@ a{
   margin: 5px 20px;
 }
 
+.categoryTable{
+  margin: 0 auto;
+  text-align: center;
+}
 
 ul{
   list-style-type: none;

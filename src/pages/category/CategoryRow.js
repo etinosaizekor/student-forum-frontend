@@ -38,16 +38,14 @@ function CategoryRow({
                 <h4>{categoryName}</h4>
                 <p>{desc}</p>
             </Desciption>
-            <table>
+            <table className="categoryTable">
                 <tbody>
                     <tr>
                         <th>Questions</th>
-                        <th>Users</th>
                         <th>Last Post</th>
                     </tr>
                     <tr>
                         <td><h6>{numberOfPosts}</h6></td>
-                        <td><h6>{numberOfUsers}</h6></td>
                         <td>{lastPost}</td>
                     </tr>
                 </tbody>
