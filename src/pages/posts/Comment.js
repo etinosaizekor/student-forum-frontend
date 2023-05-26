@@ -1,7 +1,6 @@
 import UserPreview from "./UserPreview";
 import Profile from "../../components/Profile";
 import styled from "styled-components";
-import Textbox from "./TextAreaField";
 import ReplyTextArea from "./ReplyTextArea";
 
 const CommentContent = styled.div`

@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { Form, Button } from 'react-bootstrap';
 import { useState, useEffect } from "react";
 import api from "../../utils/api";
-import categoryData from "../../data/categoryData";
 
 const NewPostForm = styled(Form)`
   width: 60vw;

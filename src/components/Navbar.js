@@ -8,7 +8,6 @@ import Navbar from 'react-bootstrap/Navbar';
 import Profile from './Profile';
 import { useDispatch, useSelector } from 'react-redux';
 import { loggedOut } from '../actions/loginAction';
-import { setUserDetails } from '../actions/userDetailsAction';
 
 
 
@@ -81,7 +80,7 @@ function PageNavbar() {
             <Profile
               src={"https://images.unsplash.com/photo-1618835962148-cf177563c6c0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cG9ydHJhaXQlMjBmYWNlfGVufDB8fDB8fA%3D%3D&w=1000&q=80"} 
               onClick={handleProfileIconClick}>
-            </Profile>
+            </Profile>  
           ) : (
             <ButtonContainer>
               <Button variant="secondary" href="/login">

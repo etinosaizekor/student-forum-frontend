@@ -39,10 +39,9 @@ const ProfileDetails = styled.td`
     gap: 10px;
 `
 
-function TableRow({name, university, latestPost, numberOfPosts, numberOfGroups, imageUrl}){
+function TableRow({name, school, latestPost, numberOfPosts, numberOfGroups, imageUrl}){
 
     return(
-        <tbody>
             <tr>
                 <ProfileDetails>
                     <ProfileIcon 
@@ -50,14 +49,12 @@ function TableRow({name, university, latestPost, numberOfPosts, numberOfGroups, 
                     />
                     <div>
                         <H3>{name}</H3>
-                        <P className="color-gray">{university}</P>
+                        <P className="color-gray">{school}</P>
                     </div>
                 </ProfileDetails>
                 <td><h6>{numberOfPosts}</h6></td>
-                <td><h6>{numberOfGroups}</h6></td>
                 <td><LatestPost>{latestPost}</LatestPost></td>
             </tr>
-        </tbody>
     )
 }
 

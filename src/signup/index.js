@@ -45,7 +45,6 @@ const handleSubmit = async (event) => {
 
   const formData = new FormData(event.target);
   const firstName = formData.get('firstName');
-  console.log(firstName);
   const lastName = formData.get('lastName');
   const email = formData.get('email');
   const school = formData.get('school');

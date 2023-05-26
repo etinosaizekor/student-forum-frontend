@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 import { loggedIn } from '../../actions/loginAction';
-import { useSelector, useDispatch} from 'react-redux';  
+import {useDispatch} from 'react-redux';  
 
 const LoginFormContainer = styled(Container)`
   width:50vw;
@@ -44,7 +44,6 @@ const Image = styled.img`
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const fullName = useSelector(state => state.loggedIn.nameOfUser);
 
   const initialValues = {
     email: '',
