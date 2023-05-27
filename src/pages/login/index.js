@@ -2,44 +2,43 @@ import styled from 'styled-components';
 import Button from 'react-bootstrap/Button';
 import Container from '../../components/Container';
 import FormWrapper from 'react-bootstrap/Form';
-import { Formik, Field, ErrorMessage, Form as FormikForm } from 'formik';
+import { Formik, Field, Form as FormikForm } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 import { loggedIn } from '../../actions/loginAction';
-import {useDispatch} from 'react-redux';  
+import { setUserDetails } from '../../actions/userDetailsAction';
+import { useDispatch } from 'react-redux';
 
 const LoginFormContainer = styled(Container)`
-  width:50vw;
+  width: 50vw;
   height: 70vh;
-  align-items: center;
-  padding: 70px;
-  position: absolute;
-  margin: 10px 120px;
   display: flex;
-  gap: 100px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15),  0 -1px 2px rgba(0,0,0,0.09);
-
-  &:hover{
-    box-shadow: 0 4px 8px rgba(0,0,0,0.09);
-  }
-`
-const ImageContainer = styled.div`
-  width: 400px;
-  height: 400px;
-  overflow: hidden;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15), 0 -1px 2px rgba(0, 0, 0, 0.09);
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15), 0 -1px 2px rgba(0, 0, 0, 0.09);
+  }
 `
 
-const Image = styled.img`
-  width: 100%;
-  height:100%;
-  object-fit: cover;
-`
-
+const StyledField = styled(Field)`
+  width: 340px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  max-width: 800px;
+`;
 
 function Login() {
   const dispatch = useDispatch();
@@ -51,67 +50,67 @@ function Login() {
   };
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email('Invalid email address').required('Required'),
-    password: Yup.string()
-      .min(6, 'Password must be at least 6 characters')
-      .required('Required'),
+    email: Yup.string().email('Invalid email address'),
+    password: Yup.string().min(6, 'Password must be at least 6 characters'),
   });
 
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = (values, { setSubmitting, resetForm }) => {
+    if (!values.email || !values.password) {
+      setErrorMessage('Please enter both email and password.');
+      return;
+    }
+
     setSubmitting(true);
-    axios.post('http://localhost:5000/users/login', values)
+    axios
+      .post('http://localhost:5000/users/login', values)
       .then((response) => {
-        if(response.status === 200){
-          dispatch(loggedIn(response.data));
+        if (response.status === 200) {
+          dispatch(loggedIn());
+          dispatch(setUserDetails(response.data))
           navigate('/questions');
         }
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
         setErrorMessage('Invalid email address or password');
       })
       .finally(() => {
         setSubmitting(false);
-        // resetForm();
+        resetForm();
       });
-    }
-    
+  };
 
   return (
-    
     <LoginFormContainer>
-      <ImageContainer>
-        <Image src={require('../../assets/study.png')} alt="" />
-      </ImageContainer>
       <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
         {({ isSubmitting }) => (
           <FormikForm>
-            <h3 style={{paddingBottom: "10px"}}>Login</h3>
+            <h3 style={{ paddingBottom: '10px' }}>Login</h3>
             <FormWrapper.Group className="mb-3" controlId="formBasicEmail">
-              <Field type="email" name="email" placeholder="Email or phone" className="form-control" />
-              <ErrorMessage name="email" component="div" className="text-danger" />
+              <StyledField type="email" name="email" placeholder="Email or phone" className="form-control" />
             </FormWrapper.Group>
 
             <FormWrapper.Group className="mb-3" controlId="formBasicPassword">
-              <Field type="password" name="password" placeholder="Password" className="form-control" />
-              <ErrorMessage name="password" component="div" className="text-danger" />
+              <StyledField type="password" name="password" placeholder="Password" className="form-control" />
             </FormWrapper.Group>
 
             {errorMessage && <div className="text-danger mb-3">{errorMessage}</div>}
 
-            <Button variant="secondary" type="submit" style={{width: "100%", marginTop: "10px"}} disabled={isSubmitting}>
-              {isSubmitting ? 'Logging in...' : 'Log in'}
+            <Button
+              variant="secondary"
+              type="submit"
+              style={{ width: '100%', marginTop: '10px' }}
+            >
+              {isSubmitting && !errorMessage ? 'Logging in...' : 'Log in'}
             </Button>
-
           </FormikForm>
         )}
       </Formik>
     </LoginFormContainer>
   );
-
-  
 }
+
 
 export default Login;

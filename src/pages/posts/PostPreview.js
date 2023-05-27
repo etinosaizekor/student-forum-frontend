@@ -32,79 +32,81 @@ const PostDetails = styled.div`
 `
 
 function Post({ questions }) {
-  const [userDetails, setUserDetails] = useState([]);
-  const [commentsCount, setCommentsCount] = useState({});
+  const [questionData, setQuestionData] = useState([]);
+
+  const fetchQuestionData = async () => {
+    try {
+      const questionDataPromises = questions.map(async (question) => {
+        const { userId, questionId, createdAt } = question;
+        const userDetails = await fetchUserDetails(userId);
+        console.log(userDetails);
+        const commentsCount = await fetchCommentsCount(questionId);
+        const formattedTime = dayjs(createdAt).fromNow();
+
+        return {
+          ...question,
+          userDetails,
+          commentsCount,
+          formattedTime,
+        };
+      });
+
+      const completeQuestionData = await Promise.all(questionDataPromises);
+      setQuestionData(completeQuestionData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const fetchUserDetails = async (userId) => {
     try {
       const response = await api.get(`/users/${userId}`);
-      const userDetailsData = response.data;
-      setUserDetails((prevUserDetails) => [...prevUserDetails, userDetailsData]);
+      return response.data[
+        0];
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      return null;
     }
   };
 
   const fetchCommentsCount = async (questionId) => {
     try {
       const response = await api.get(`/comments/${questionId}`);
-      const commentsData = response.data;
-      const commentsCountData = commentsData.length;
-      setCommentsCount((prevCommentsCount) => ({
-        ...prevCommentsCount,
-        [questionId]: commentsCountData,
-      }));
+      return response.data.length;
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      return 0;
     }
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      for (const { userId, questionId } of questions) {
-        if (userId !== null && !userDetails.find((user) => user.userId === userId)) {
-          await fetchUserDetails(userId);
-        }
-
-        if (!commentsCount[questionId]) {
-          await fetchCommentsCount(questionId);
-        }
-      }
-    };
-
-    fetchData();
+    fetchQuestionData();
   }, [questions]);
 
   return (
     <div>
-      {questions.map(({ questionTitle, questionBody, questionId, userId, createdAt }) => {
-        const currentUserDetails = userDetails.find((user) => user.userId === userId) || {};
-        const questionCommentsCount = commentsCount[questionId] || 0;
-        const formattedTime = dayjs(createdAt).fromNow();
-
-        return (
-          <Link key={questionId} to={`/question/${questionId}`} className="link">
-            <PostContainer>
-              <div>
-                <h4>{questionTitle}</h4>
-                <p>{questionBody}</p>
-                <Divider />
-                <PostDetails>
-                  <UserPreview>
-                    <Profile src={require("../../assets/prof.jpg")} />
-                    <p>{`${currentUserDetails.firstName} ${currentUserDetails.lastName}`}</p>
-                  </UserPreview>
-                  <p className="color-gray">{formattedTime}</p>
-                  <Comment>
-                    <ChatBubbleOutlineIcon />
-                    <p>{`${questionCommentsCount} comment${questionCommentsCount !== 1 ? "s" : ""}`}</p>
-                  </Comment>
-                </PostDetails>
-              </div>
-            </PostContainer>
-          </Link>
-        );
-      })}
+      {questionData.map(({ questionTitle, questionBody, questionId, userDetails, commentsCount, formattedTime }) => (
+        <Link key={questionId} to={`/question/${questionId}`} className="link">
+          <PostContainer>
+            <div>
+              <h4>{questionTitle}</h4>
+              <p>{questionBody}</p>
+              <Divider />
+              <PostDetails>
+                <UserPreview>
+                  <Profile src={userDetails.imageUrl} />
+                  <p>{`${userDetails?.firstName} ${userDetails?.lastName}`}</p>
+                </UserPreview>
+                <p className="color-gray">{formattedTime}</p>
+                <Comment>
+                  <ChatBubbleOutlineIcon />
+                  <p>{`${commentsCount} comment${commentsCount !== 1 ? "s" : ""}`}</p>
+                </Comment>
+              </PostDetails>
+            </div>
+          </PostContainer>
+        </Link>
+      ))}
     </div>
   );
 }

@@ -38,71 +38,71 @@ const ProfileCard = styled.div`
   transition: all 0.5s ease-in-out;
 `;
 
-function PageNavbar() {
+  function PageNavbar() {
 
-  const dispatch = useDispatch();
-  const nameOfUser = useSelector(state => state.userDetails.nameOfUser)
-  const isLoggedIn = useSelector(state => state.loggedIn.isLoggedIn)
-  const [showProfileCard, setShowProfileCard] = useState(false);
+    const dispatch = useDispatch();
+    const userDetails = useSelector(state => state.userDetails.userDetails)
+    const isLoggedIn = useSelector(state => state.loggedIn.isLoggedIn)
+    const [showProfileCard, setShowProfileCard] = useState(false);
 
-  const handleProfileIconClick = () => {
-    setShowProfileCard(!showProfileCard);
-  };
+    const handleProfileIconClick = () => {
+      setShowProfileCard(!showProfileCard);
+    };
 
-  const handleSignOutClick = () => {
-    dispatch(loggedOut())
-    setShowProfileCard(!showProfileCard);
-  };
+    const handleSignOutClick = () => {
+      dispatch(loggedOut())
+      setShowProfileCard(!showProfileCard);
+    };
 
 
-  return (
-    <NavBar style={{backgroundColor: "rgb(244, 245, 247)"}} expand="lg" className='navbar-custom'>
-      <Container fluid className='m-4'>
-        <Navbar.Brand href="#">Student Forum</Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: '100px' }}
-            navbarScroll
-          >
-          </Nav>
-          <Form className="d-flex" style={{marginRight: "450px", padding: "auto"}}>
-            <Form.Control
-              type="search"
-              className="me-2"
-              aria-label="Search"
-              style={{width: "800px"}}
-            />
-            <Button variant="outline-secondary">Search</Button>
-          </Form>
-          {isLoggedIn ? ( 
-            <Profile
-              src={"https://images.unsplash.com/photo-1618835962148-cf177563c6c0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cG9ydHJhaXQlMjBmYWNlfGVufDB8fDB8fA%3D%3D&w=1000&q=80"} 
-              onClick={handleProfileIconClick}>
-            </Profile>  
-          ) : (
-            <ButtonContainer>
-              <Button variant="secondary" href="/login">
-                Login
-              </Button>
-              <Button variant="outline-secondary" href="register">
-                Sign up
-              </Button>
-            </ButtonContainer>
-          )}
-        </Navbar.Collapse>
-      </Container>
-      {showProfileCard && ( 
-        <ProfileCard>
-          <div>
-            <strong>Name:</strong> {nameOfUser}
-          </div>
-          <Button variant="secondary" onClick={handleSignOutClick} style={{marginTop: "10px"}}>Sign Out</Button>
-        </ProfileCard>
-      )}
-    </NavBar>
-  );
-}
+    return (
+      <NavBar style={{backgroundColor: "rgb(244, 245, 247)"}} expand="lg" className='navbar-custom'>
+        <Container fluid className='m-4'>
+          <Navbar.Brand href="#">Student Forum</Navbar.Brand>
+          <Navbar.Toggle aria-controls="navbarScroll" />
+          <Navbar.Collapse id="navbarScroll">
+            <Nav
+              className="me-auto my-2 my-lg-0"
+              style={{ maxHeight: '100px' }}
+              navbarScroll
+            >
+            </Nav>
+            <Form className="d-flex" style={{marginRight: "450px", padding: "auto"}}>
+              <Form.Control
+                type="search"
+                className="me-2"
+                aria-label="Search"
+                style={{width: "800px"}}
+              />
+              <Button variant="outline-secondary">Search</Button>
+            </Form>
+            {isLoggedIn ? ( 
+              <Profile
+                src={userDetails.imageUrl} 
+                onClick={handleProfileIconClick}>
+              </Profile>  
+            ) : (
+              <ButtonContainer>
+                <Button variant="secondary" href="/login">
+                  Login
+                </Button>
+                <Button variant="outline-secondary" href="register">
+                  Sign up
+                </Button>
+              </ButtonContainer>
+            )}
+          </Navbar.Collapse>
+        </Container>
+        {showProfileCard && ( 
+          <ProfileCard>
+            <div>
+              <strong>Name:</strong> {userDetails.fullName}
+            </div>
+            <Button variant="secondary" onClick={handleSignOutClick} style={{marginTop: "10px"}}>Sign Out</Button>
+          </ProfileCard>
+        )}
+      </NavBar>
+    );
+  }
 
 export default PageNavbar;

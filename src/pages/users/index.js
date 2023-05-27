@@ -66,7 +66,7 @@ function User() {
 
   return (
     <UserInfo>
-      <table lassName="userTableData">
+      <table>
         <thead>
           <tr >
             <th>Personal details</th>
