@@ -9,7 +9,7 @@ function ReplyTextArea({id, onReplyAdded}) {
         await api.post('/replies/new', data)
         onReplyAdded(data)
       } catch(err){
-        console.log(err);
+        console.error(err);
       }
     }
     return (

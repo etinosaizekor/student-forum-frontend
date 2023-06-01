@@ -4,6 +4,11 @@ import Button from 'react-bootstrap/Button';
 import Container from '../components/Container';
 import Form from 'react-bootstrap/Form';
 
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
+import { setUserDetails } from '../actions/userDetailsAction';
+import { loggedIn } from '../actions/loginAction';
+
 
 const RegistrationContainer = styled(Container)`
   width: 50vw;
@@ -40,31 +45,41 @@ const FormLabel = styled(Form.Label)`
   margin-bottom: 0;
 `;
 
-const handleSubmit = async (event) => {
-  event.preventDefault(); 
-
-  const formData = new FormData(event.target);
-  const firstName = formData.get('firstName');
-  const lastName = formData.get('lastName');
-  const email = formData.get('email');
-  const school = formData.get('school');
-  const password = formData.get('password');
-
-  try {
-    const response = await axios.post('http://localhost:5000/users', {
-      firstName,
-      lastName,
-      email,
-      school,
-      password,
-    });
-
-  } catch (error) {
-    console.error(error);
-  }
-};
 
 function Registration() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+  
+    const formData = new FormData(event.target);
+    const firstName = formData.get('firstName');
+    const lastName = formData.get('lastName');
+    const email = formData.get('email');
+    const school = formData.get('school');
+    const password = formData.get('password');
+  
+    try {
+      await axios.post('http://localhost:5000/users/create', {
+        firstName,
+        lastName,
+        email,
+        school,
+        password,
+      }).then((response) => {
+        console.log(response.data)
+        if (response.status === 200) {
+          dispatch(loggedIn()); 
+          dispatch(setUserDetails(response.data))
+          navigate('/questions');
+        }
+      });      
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <RegistrationContainer>
       <h3>Register</h3>
@@ -72,37 +87,37 @@ function Registration() {
         <FormRow>
           <FormColumn>
             <FormLabel>First name</FormLabel>
-            <Form.Control type="text" placeholder="Enter first name" name="firstName"/>
+            <Form.Control type="text" placeholder="Enter first name" name="firstName" required />
           </FormColumn>
           <FormColumn>
             <FormLabel>Last name</FormLabel>
-            <Form.Control type="text" placeholder="Enter last name" name="lastName"/>
+            <Form.Control type="text" placeholder="Enter last name" name="lastName" required />
           </FormColumn>
         </FormRow>
 
         <FormRow>
           <FormColumn>
             <FormLabel>Email address</FormLabel>
-            <Form.Control type="email" placeholder="Enter email" name="email"/>
+            <Form.Control type="email" placeholder="Enter email" name="email" required />
           </FormColumn>
           <FormColumn>
             <FormLabel>school</FormLabel>
-            <Form.Control type="text" placeholder="Enter school" name="school"/>
+            <Form.Control type="text" placeholder="Enter school" name="school" />
           </FormColumn>
         </FormRow>
 
         <FormRow>
           <FormColumn>
             <FormLabel>Create password</FormLabel>
-            <Form.Control type="password" placeholder="Enter password" name="password"/>
+            <Form.Control type="password" placeholder="Enter password" name="password" required />
           </FormColumn>
           <FormColumn>
             <FormLabel>Confirm password</FormLabel>
-            <Form.Control type="password" placeholder="Confirm password" name="password"/>
+            <Form.Control type="password" placeholder="Confirm password" name="password" required />
           </FormColumn>
         </FormRow>
 
-        <Button variant="secondary" type="submit" style={{width: "70%", margin: "30px auto" , display: "block"}}>
+        <Button variant="secondary" type="submit" style={{ width: "70%", margin: "30px auto", display: "block" }}>
           Submit
         </Button>
       </Form>

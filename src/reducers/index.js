@@ -4,7 +4,7 @@ import { combineReducers } from '@reduxjs/toolkit'
 import userQuestionsReducer from './userQuestion';
 
 const allReducers = combineReducers({
-    loggedIn: loggedReducer,
+    isLogged: loggedReducer,
     userDetails: userDetailsReducer,
     userQuestions: userQuestionsReducer
 })

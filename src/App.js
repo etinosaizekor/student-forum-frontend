@@ -22,7 +22,7 @@ const Body = styled.div`
 `
 
 function App() {
-  const isLoggedIn = useSelector(state => state.loggedIn)
+  const {isLoggedIn} = useSelector(state => state.isLogged);
 
   return (
     <>
@@ -31,7 +31,7 @@ function App() {
       {isLoggedIn ? <Sidebar /> : null}
         <Wrapper>
             <Routes>
-            <Route path = '/login' element = {<Login/>}/>
+            <Route path = '/' element = {<Login/>}/>
               <Route path='/register' element={<Registration/>}></Route>
               <Route path = '/user' element = {<User/>}/>
               <Route path = '/questions' element = {<UserQuestions/>}/>

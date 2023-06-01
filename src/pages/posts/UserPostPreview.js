@@ -4,14 +4,16 @@ import PostPreview from './PostPreview';
 import { useEffect } from 'react';
 
 function UserPostPreview() {
-
     const dispatch = useDispatch();
-    const { questions, loading, error } = useSelector((state) => state.userQuestions);
-    const userId = useSelector((state) => state.userDetails.userId);
+    const { questions } = useSelector((state) => state.userQuestions);
+    const { userDetails } = useSelector(state => state.userDetails);
+    const { userId } = userDetails || {}; // Destructure userId with a default value of an empty object
 
     useEffect(() => {
-        dispatch(fetchUserQuestions('123'));
-    }, [dispatch]);
+        if (userId) {
+            dispatch(fetchUserQuestions(userId));
+        }
+    }, [dispatch, userId]);
 
     return (
         <PostPreview

@@ -39,7 +39,6 @@ function Post({ questions }) {
       const questionDataPromises = questions.map(async (question) => {
         const { userId, questionId, createdAt } = question;
         const userDetails = await fetchUserDetails(userId);
-        console.log(userDetails);
         const commentsCount = await fetchCommentsCount(questionId);
         const formattedTime = dayjs(createdAt).fromNow();
 

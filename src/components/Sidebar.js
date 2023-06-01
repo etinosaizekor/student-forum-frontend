@@ -9,25 +9,24 @@ const Container = styled.div`
     background-color: rgb(244, 245, 247);
     position: fixed;
 `
+function Sidebar() {
 
-function Sidebar(){
-    return(
-        <Container>
-                <ul className="navbar-items">
-                    {SidebarData.map((data, index) =>{
-                        return(
-                            <SidebarItems
-                                key={index}
-                                linkText={data.linkText}
-                                path = {data.path}
-                                icon = {data.icon}
-                            />
-                        )
-                    })}
-                </ul>
-        </Container>
-    )
+  return (
+    <Container>
+      <ul className="navbar-items">
+        {SidebarData.map((data, index) => (
+          <SidebarItems
+            key={index}
+            linkText={data.linkText}
+            path={data.path}
+            icon={data.icon}
+          />
+        ))}
+      </ul>
+    </Container>
+  )
 }
+
 
 export default Sidebar;
 
